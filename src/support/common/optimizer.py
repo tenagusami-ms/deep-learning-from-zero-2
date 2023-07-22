@@ -1,14 +1,11 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')
-from common.np import *
+from .np import *
 
 
 class SGD:
-    '''
+    """
     確率的勾配降下法（Stochastic Gradient Descent）
-    '''
+    """
 
     def __init__(self, lr=0.01):
         self.lr = lr
@@ -19,9 +16,9 @@ class SGD:
 
 
 class Momentum:
-    '''
+    """
     Momentum SGD
-    '''
+    """
 
     def __init__(self, lr=0.01, momentum=0.9):
         self.lr = lr
@@ -40,9 +37,9 @@ class Momentum:
 
 
 class Nesterov:
-    '''
-    Nesterov's Accelerated Gradient (http://arxiv.org/abs/1212.0901)
-    '''
+    """
+    Nesterov's Accelerated Gradient
+    """
 
     def __init__(self, lr=0.01, momentum=0.9):
         self.lr = lr
@@ -63,9 +60,9 @@ class Nesterov:
 
 
 class AdaGrad:
-    '''
+    """
     AdaGrad
-    '''
+    """
 
     def __init__(self, lr=0.01):
         self.lr = lr
@@ -83,9 +80,9 @@ class AdaGrad:
 
 
 class RMSprop:
-    '''
+    """
     RMSprop
-    '''
+    """
 
     def __init__(self, lr=0.01, decay_rate=0.99):
         self.lr = lr
@@ -105,9 +102,9 @@ class RMSprop:
 
 
 class Adam:
-    '''
-    Adam (http://arxiv.org/abs/1412.6980v8)
-    '''
+    """
+    Adam
+    """
 
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999):
         self.lr = lr

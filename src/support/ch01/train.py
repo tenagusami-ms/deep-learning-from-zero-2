@@ -1,10 +1,7 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')  # 親ディレクトリのファイルをインポートするための設定
-from common.optimizer import SGD
-from common.trainer import Trainer
-from dataset import spiral
+from src.support.common.optimizer import SGD
+from src.support.common.trainer import Trainer
+from src.support.dataset import spiral
 from two_layer_net import TwoLayerNet
 
 # ハイパーパラメータの設定

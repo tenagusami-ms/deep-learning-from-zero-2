@@ -1,9 +1,7 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')  # 親ディレクトリのファイルをインポートするための設定
-from dataset import spiral
 import matplotlib.pyplot as plt
+
+from src.support.dataset import spiral
 
 x, t = spiral.load_data()
 print('x', x.shape)  # (300, 2)

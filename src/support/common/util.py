@@ -1,9 +1,8 @@
 # coding: utf-8
+import os
 import sys
 
-sys.path.append('..')
-import os
-from common.np import *
+from src.support.common.np import *
 
 
 def preprocess(text):
@@ -25,27 +24,27 @@ def preprocess(text):
 
 
 def cos_similarity(x, y, eps=1e-8):
-    '''コサイン類似度の算出
+    """コサイン類似度の算出
 
     :param x: ベクトル
     :param y: ベクトル
     :param eps: ”0割り”防止のための微小値
     :return:
-    '''
+    """
     nx = x / (np.sqrt(np.sum(x ** 2)) + eps)
     ny = y / (np.sqrt(np.sum(y ** 2)) + eps)
     return np.dot(nx, ny)
 
 
 def most_similar(query, word_to_id, id_to_word, word_matrix, top=5):
-    '''類似単語の検索
+    """類似単語の検索
 
     :param query: クエリ（テキスト）
     :param word_to_id: 単語から単語IDへのディクショナリ
     :param id_to_word: 単語IDから単語へのディクショナリ
     :param word_matrix: 単語ベクトルをまとめた行列。各行に対応する単語のベクトルが格納されていることを想定する
     :param top: 上位何位まで表示するか
-    '''
+    """
     if query not in word_to_id:
         print('%s is not found' % query)
         return
@@ -72,14 +71,15 @@ def most_similar(query, word_to_id, id_to_word, word_matrix, top=5):
 
 
 def convert_one_hot(corpus, vocab_size):
-    '''one-hot表現への変換
+    """one-hot表現への変換
 
     :param corpus: 単語IDのリスト（1次元もしくは2次元のNumPy配列）
     :param vocab_size: 語彙数
     :return: one-hot表現（2次元もしくは3次元のNumPy配列）
-    '''
+    """
     N = corpus.shape[0]
 
+    one_hot: np.ndarray = None
     if corpus.ndim == 1:
         one_hot = np.zeros((N, vocab_size), dtype=np.int32)
         for idx, word_id in enumerate(corpus):
@@ -96,13 +96,13 @@ def convert_one_hot(corpus, vocab_size):
 
 
 def create_co_matrix(corpus, vocab_size, window_size=1):
-    '''共起行列の作成
+    """共起行列の作成
 
     :param corpus: コーパス（単語IDのリスト）
     :param vocab_size:語彙数
     :param window_size:ウィンドウサイズ（ウィンドウサイズが1のときは、単語の左右1単語がコンテキスト）
     :return: 共起行列
-    '''
+    """
     corpus_size = len(corpus)
     co_matrix = np.zeros((vocab_size, vocab_size), dtype=np.int32)
 
@@ -123,12 +123,13 @@ def create_co_matrix(corpus, vocab_size, window_size=1):
 
 
 def ppmi(C, verbose=False, eps=1e-8):
-    '''PPMI（正の相互情報量）の作成
+    """PPMI（正の相互情報量）の作成
 
     :param C: 共起行列
     :param verbose: 進行状況を出力するかどうか
+    :param eps: ”0割り”防止のための微小値
     :return:
-    '''
+    """
     M = np.zeros_like(C, dtype=np.float32)
     N = np.sum(C)
     S = np.sum(C, axis=0)
@@ -148,12 +149,12 @@ def ppmi(C, verbose=False, eps=1e-8):
 
 
 def create_contexts_target(corpus, window_size=1):
-    '''コンテキストとターゲットの作成
+    """コンテキストとターゲットの作成
 
     :param corpus: コーパス（単語IDのリスト）
     :param window_size: ウィンドウサイズ（ウィンドウサイズが1のときは、単語の左右1単語がコンテキスト）
     :return:
-    '''
+    """
     target = corpus[window_size:-window_size]
     contexts = []
 
@@ -175,11 +176,11 @@ def to_cpu(x):
     return np.asnumpy(x)
 
 
-def to_gpu(x):
-    import cupy
-    if type(x) == cupy.ndarray:
-        return x
-    return cupy.asarray(x)
+# def to_gpu(x):
+#     import cupy
+#     if type(x) == cupy.ndarray:
+#         return x
+#     return cupy.asarray(x)
 
 
 def clip_grads(grads, max_norm):

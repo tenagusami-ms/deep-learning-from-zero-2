@@ -1,12 +1,11 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')
-import numpy
 import time
+
 import matplotlib.pyplot as plt
-from common.np import *  # import numpy as np
-from common.util import clip_grads
+import numpy
+
+from src.support.common.np import *  # import numpy as np
+from src.support.common.util import clip_grads
 
 
 class Trainer:
@@ -139,10 +138,10 @@ class RnnlmTrainer:
 
 
 def remove_duplicate(params, grads):
-    '''
+    """
     パラメータ配列中の重複する重みをひとつに集約し、
     その重みに対応する勾配を加算する
-    '''
+    """
     params, grads = params[:], grads[:]  # copy list
 
     while True:
@@ -165,9 +164,12 @@ def remove_duplicate(params, grads):
                     params.pop(j)
                     grads.pop(j)
 
-                if find_flg: break
-            if find_flg: break
+                if find_flg:
+                    break
+            if find_flg:
+                break
 
-        if not find_flg: break
+        if not find_flg:
+            break
 
     return params, grads

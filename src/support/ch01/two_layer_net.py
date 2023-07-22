@@ -1,9 +1,7 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
-from common.layers import Affine, Sigmoid, SoftmaxWithLoss
+
+from src.support.common.layers import Affine, Sigmoid, SoftmaxWithLoss
 
 
 class TwoLayerNet:

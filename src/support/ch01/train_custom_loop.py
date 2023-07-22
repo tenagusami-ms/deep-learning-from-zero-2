@@ -1,11 +1,9 @@
 # coding: utf-8
-import sys
-
-sys.path.append('..')  # 親ディレクトリのファイルをインポートするための設定
-import numpy as np
-from common.optimizer import SGD
-from dataset import spiral
 import matplotlib.pyplot as plt
+import numpy as np
+
+from src.support.common.optimizer import SGD
+from src.support.dataset import spiral
 from two_layer_net import TwoLayerNet
 
 # ハイパーパラメータの設定

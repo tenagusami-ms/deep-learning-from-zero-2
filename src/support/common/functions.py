@@ -1,5 +1,5 @@
 # coding: utf-8
-from common.np import *
+from src.support.common.np import *
 
 
 def sigmoid(x):
