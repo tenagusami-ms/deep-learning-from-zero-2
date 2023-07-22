@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ゼロから作るdeep learning ②"
+version = "0.1.0"
+description = ""
+authors = ["KAN-YA, Yukitoshi <tenagusami@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.25.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
